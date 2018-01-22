@@ -1,0 +1,6 @@
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\bin\newprac2.dll.config
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\bin\newprac2.dll
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\bin\newprac2.pdb
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\obj\Debug\newprac2.dll
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\obj\Debug\newprac2.pdb
+c:\users\subashchandran\documents\visual studio 2013\Projects\newprac2\newprac2\obj\Debug\newprac2.csprojResolveAssemblyReference.cache
