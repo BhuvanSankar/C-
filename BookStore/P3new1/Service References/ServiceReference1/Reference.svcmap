@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="52c1908a-a130-41c3-8bf2-e63bade1200d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64381/P3newWCF.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="P3newWCF.wsdl" MetadataType="Wsdl" ID="22d29643-cfb2-454d-96b3-77ea0ae06097" SourceId="1" SourceUrl="http://localhost:64381/P3newWCF.svc?wsdl" />
+    <MetadataFile FileName="P3newWCF1.xsd" MetadataType="Schema" ID="c15894aa-dc3e-452f-8673-1c089b9fadd9" SourceId="1" SourceUrl="http://localhost:64381/P3newWCF.svc?xsd=xsd1" />
+    <MetadataFile FileName="P3newWCF.xsd" MetadataType="Schema" ID="b2490bda-1385-4a12-9e0e-e4d678326a55" SourceId="1" SourceUrl="http://localhost:64381/P3newWCF.svc?xsd=xsd0" />
+    <MetadataFile FileName="P3newWCF11.xsd" MetadataType="Schema" ID="77dd6804-c783-4467-9d06-31ff036526ba" SourceId="1" SourceUrl="http://localhost:64381/P3newWCF.svc?xsd=xsd2" />
+    <MetadataFile FileName="P3newWCF.disco" MetadataType="Disco" ID="1b884a5c-a16e-4d5a-911b-0760393e9c76" SourceId="1" SourceUrl="http://localhost:64381/P3newWCF.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
