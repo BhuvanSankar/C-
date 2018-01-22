@@ -1,0 +1,231 @@
+﻿
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+    <title></title>
+
+
+</head>
+<body bgcolor="#FFFFAA">
+    <div>
+        <h2 style="color:red">List of Players</h2>
+        <ul id="ReadPlayers" />
+    </div>
+    <br />
+
+    <div>
+        <h2 style="color:red">Search (or) Delete</h2>
+        <select id="Sel" class="Sub">
+            <option value="SL">Select</option>
+            <option value="ID">ID</option>
+            <option value="Name">Name</option>
+        </select>
+        <input id="Text1" type="text" pattern="[0-9A-Za-z\\s]*" title="Please enter a valid data" class="Sub" />
+
+        <input id="SearchButton" type="submit" value="Search" onclick="FindPlayer();" />
+        <input id="DeleteButton" type="submit" value="Delete" onclick="DeletePlayer();" />
+        <p id="fdplayer" />
+    </div>
+    <br />
+    <br />
+    <div>
+        <h2 style="color:red">Player Registration</h2>
+        <form id="form1">
+            <label for="RID">Registration ID:</label> <br />
+            <input type="text" id="RID" name="RID" pattern="^[0-9a-z]*$" title="Enter a valid ID starting with the letter p" class="required" /><label for="RID" id="rid"></label>  <br />
+            <label for="Firstname">First Name:</label> <br />
+            <input type="text" id="Firstname" name="Firstname" pattern="^[A-Za-z]*$" title="Invalid First Name" class="required" /><br />
+            <label for="Lastname">Last Name:</label> <br />
+            <input type="text" id="Lastname" name="Lastname" pattern="^[A-Za-z]*$" title="Invalid Last Name" class="required" /><br />
+            <label for="Teamname">Team Name:</label> <br />
+            <input type="text" id="Teamname" name="Teamname" pattern="^[A-Za-z]*$" title="Invalid Team Name" class="required" /> <br />
+            <label for="Dateofbirth">Date of Birth:</label> <br />
+            <input type="text" id="Dateofbirth" name="Dateofbirth" pattern="\d{4}/\d{1,2}/\d{1,2}" title="DOB format should be yyyy/mm/dd" class="required" />  <br />
+            <input type="button" id="post" value="Register Me" onclick="UpdatePlayer()" />
+        </form>
+    </div>
+    <script type="text/javascript" language="javascript">
+
+
+    </script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    
+
+    <script>
+        var uri = 'api/Players';
+
+        $(document).ready(function () {            
+            $.ajax({
+                type: 'GET',
+                url: uri,
+                success: function (data) {
+                    displayData(data);
+                }
+            })
+
+        });
+
+        function formatItem(item) {
+
+            return item.RegistrationID + "," + item.FirstName + " " + item.LastName + "," + item.TeamName + "," + item.DateOfBirth.replace("T00:00:00", "");
+
+
+        }
+
+
+
+        function displayData(data) {
+            $('ul').empty();            
+            $.each(data, function (key, item) {                
+                $('<li>', { text: formatItem(item) }).appendTo($('#ReadPlayers'));
+            });
+        }
+
+
+        function FindPlayer() {
+            var tb = $('#Text1').val();
+            var dp = $('#Sel').val();
+            $.ajax({
+                type: 'GET',
+                url: uri + '?tb=' + tb + '&dp=' + dp,
+                success: function (data) {
+                    $('p').empty();                    
+                    $.each(data, function (key, item) {                        
+                        $('<li>', { text: formatItem(item) }).appendTo($('#fdplayer'));
+                    })
+                },
+                error: function (jqXHR, textStatus, err) {
+                    $('#fdplayer').text('Error: ' + err);
+                }
+            })
+        }
+
+
+        function DeletePlayer() {
+            var tb = $('#Text1').val();
+            var dp = $('#Sel').val();
+
+            $.ajax({
+                type: 'DELETE',
+                url: uri + '?tb1=' + tb + '&dp1=' + dp,
+                success: function (data) {
+                    $('ul').empty();                    
+                    $.each(data, function (key, item) {                        
+                        $('<li>', { text: formatItem(item) }).appendTo($('#ReadPlayers'));
+                    })
+                },
+                error: function (jqXHR, textStatus, err) {
+                    $('#product').text('Error: ' + err);
+                }
+            })
+        }
+
+
+        function UpdatePlayer() {
+            var id = $('#RID').val();
+            var fn = $('#Firstname').val();
+            var ln = $('#Lastname').val();
+            var tn = $('#Teamname').val();
+            var dob = $('#Dateofbirth').val();
+            $.ajax({
+                type: 'POST',
+                url: uri + '?id=' + id + '&fn=' + fn + '&ln=' + ln + '&tn=' + tn + '&dob=' + dob,
+                data: $('form').serialize(),
+                success: function (data) {
+                    displayData(data);
+                }
+            })
+        }
+
+        $(document).ready(function () {
+            $('#post').click(function (e) {
+                var isValid = true;
+                $('input[type="text"].required').each(function () {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        // alert("ENRTY was NOT VALID");
+                        $(this).css({
+                            "border": "1px solid blue",                            
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",                           
+                        });
+                    }
+                });
+                if (isValid == false) {
+                    e.preventDefault();
+                    //alert('One of your entry is incorrect');
+                }
+
+                else {
+                    //alert('Successfully Added');
+                }
+
+
+
+
+            });
+        });
+
+        $(document).ready(function () {
+            $('#SearchButton').click(function (e) {
+                var isValid = true;
+                $('input[type="text"].Sub').each(function () {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid red",                            
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",                           
+                        });
+                    }
+                });
+                if (isValid == false)
+                    e.preventDefault();                
+            });
+        });
+
+        $(document).ready(function () {
+            $('#DeleteButton').click(function (e) {
+                var isValid = true;
+                $('input[type="text"].Sub').each(function () {
+                    if ($.trim($(this).val()) == '') {
+                        isValid = false;
+                        $(this).css({
+                            "border": "1px solid blue",                            
+                        });
+                    }
+                    else {
+                        $(this).css({
+                            "border": "",                            
+                        });
+                    }
+                });
+                if (isValid == false)
+                    e.preventDefault();                
+            });
+        });
+
+
+
+
+
+
+    </script>
+
+</body>
+
+
+
+</html>
+
+
+
